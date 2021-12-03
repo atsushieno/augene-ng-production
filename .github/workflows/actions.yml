@@ -41,12 +41,9 @@ jobs:
     - name: build step 1
       run: make sfz
     - name: build step 2
-      if: false
       run: apt sfizz-config plugins augene-ng generate-mars-sfizz-mp3
-
     - name: upload artifact
-      if: false
-      #if: success()
+      if: success()
       uses: actions/upload-artifact@v2
       with:
         name: augene-ng-production-artifacts
