@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- save it as ~/.config/SFZTools/sfizz/settings.xml -->
 <properties>
-	<entry key="user_files_dir">%%PWD%%/sounds/sfz</entry>
+	<entry key="user_files_dir">/home/%%USER%%/sounds/sfz</entry>
 	<entry key="current_theme">Dark</entry>
 </properties>

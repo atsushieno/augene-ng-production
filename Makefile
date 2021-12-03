@@ -1,3 +1,4 @@
+USER=$(shell whoami)
 
 build: apt sfizz-config plugins sfz augene-ng generate-mars-sfizz-mp3
 
@@ -20,7 +21,7 @@ apt:
 sfizz-config:
 	if [ ! -f ~/.config/SFZTools/sfizz/settings.xml ] ; then \
 		mkdir -p ~/.config/SFZTools/sfizz/ ; \
-		sed -e "s/%%UPWD%/`pwd`/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
+		sed -e "s/%%USER%%/$(USER)/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
 	fi
 
 
