@@ -25,7 +25,7 @@ sfizz-config:
 	fi
 
 
-sfz: vpo3 freepats
+sfz: vpo3 freepats nbo
 
 vpo3:
 	mkdir -p sounds/sfz
