@@ -1,0 +1,19 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index d740938..3000304 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -10,6 +10,7 @@ juce_add_plugin(SimpleReverb
+     PLUGIN_MANUFACTURER_CODE "Szkn"  
+     PLUGIN_CODE "Srvb"
+     FORMATS "VST3" "AU" "Standalone" 
++    NEEDS_CURL TRUE
+     VST3_CATEGORIES "Fx" 
+     AU_MAIN_TYPE "kAudioUnitType_Effect")
+ 
+@@ -37,4 +38,4 @@ target_link_libraries(SimpleReverb PUBLIC
+     juce::juce_gui_basics
+     juce::juce_gui_extra)
+ 
+-juce_generate_juce_header(SimpleReverb)
+\ No newline at end of file
++juce_generate_juce_header(SimpleReverb)

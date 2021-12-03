@@ -1,0 +1,9 @@
+[submodule "augene-ng"]
+	path = external/augene-ng
+	url = https://github.com/atsushieno/augene-ng.git
+[submodule "external/Virtual_Playing_Orchestra_3"]
+	path = external/Virtual_Playing_Orchestra_3
+	url = https://github.com/open-soundfonts/Virtual_Playing_Orchestra_3.git
+[submodule "external/SimpleReverb"]
+	path = external/SimpleReverb
+	url = https://github.com/szkkng/SimpleReverb.git

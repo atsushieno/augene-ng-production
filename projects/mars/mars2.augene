@@ -1,0 +1,13 @@
+<AugeneProject>
+  <Includes>
+    <Include Bank="1" Source="../Banks/SF2Banks.augene" />
+  </Includes>
+  <AudioGraphs>
+    <AudioGraph Id="simple_reverb" Source="../Banks/simple-reverb.filtergraph" />
+  </AudioGraphs>
+  <MasterPlugins />
+  <MmlFiles>
+    <MmlFile>mars2.mugene</MmlFile>
+  </MmlFiles>
+  <MmlStrings />
+</AugeneProject>
