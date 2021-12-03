@@ -19,7 +19,7 @@ apt:
 
 sfizz-config:
 	if [ ! -f ~/.config/SFZTools/sfizz/settings.xml ] ; then \
-		mkdir -p ~/.config/SFZTools/sfizz/ \
+		mkdir -p ~/.config/SFZTools/sfizz/ ; \
 		sed -e "s/%%UPWD%/`pwd`/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
 	fi
 
