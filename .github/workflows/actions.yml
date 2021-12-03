@@ -13,6 +13,16 @@ jobs:
       uses: actions/checkout@v1
       with:
         submodules: recursive
+    - name: cache sfz
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-sfz
+      with:
+        path:
+          /home/runner/sounds/sfz
+          /home/runner/DrawbarOrganEmulation-SFZ-20190712.tar.xz
+          /home/runner/nbo_2.zip
+        key: sounds/sfz
     - name: apt update
       run: |
         sudo apt-get update
@@ -28,10 +38,15 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 11
-    - name: build
-      run: make
+    - name: build step 1
+      run: make sfz
+    - name: build step 2
+      if: false
+      run: apt sfizz-config plugins augene-ng generate-mars-sfizz-mp3
+
     - name: upload artifact
-      if: success()
+      if: false
+      #if: success()
       uses: actions/upload-artifact@v2
       with:
         name: augene-ng-production-artifacts

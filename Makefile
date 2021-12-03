@@ -1,6 +1,6 @@
 USER=$(shell whoami)
 
-build: apt sfizz-config plugins sfz augene-ng generate-mars-sfizz-mp3
+build: sfz apt sfizz-config plugins augene-ng generate-mars-sfizz-mp3
 
 apt:
 	echo "Installing sfizz from OBS..."
@@ -29,7 +29,7 @@ sfz: vpo3 freepats
 
 vpo3:
 	mkdir -p sounds/sfz
-	rm sounds/sfz/Virtual-Playing-Orchestra3
+	rm -rf sounds/sfz/Virtual-Playing-Orchestra3
 	cd sounds/sfz && ln -s ../../external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../..
 
 freepats: freepats.stamp
