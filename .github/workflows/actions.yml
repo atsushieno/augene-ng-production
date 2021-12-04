@@ -46,8 +46,17 @@ jobs:
       run: make sfizz-config plugins
     - name: setup augene-ng
       run: make augene-ng
+    - name: setup plugins ready for playing
+      run: make setup-plugin-run-env
     - name: generate mp3
-      run: make generate-mars-sfizz-mp3
+      if: false # FIXME: use this instead
+      run: make generate-music
+    - name: augene to TE # FIXME: remove these split tasks
+      run: make compile-to-tracktionedit
+    - name: TE to WAV # FIXME: remove these split tasks
+      run: make render-wav
+    - name: WAV to MP3 # FIXME: remove these split tasks
+      run: make convert-wav-to-mp3
     - name: upload artifact
       if: success()
       uses: actions/upload-artifact@v2

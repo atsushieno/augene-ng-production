@@ -1,6 +1,6 @@
 USER=$(shell whoami)
 
-build: sfz apt sfizz-config plugins augene-ng generate-mars-sfizz-mp3
+build: sfz apt sfizz-config plugins augene-ng setup-plugin-run-env generate-music
 
 apt:
 	echo "Installing sfizz from OBS..."
@@ -71,12 +71,9 @@ augene-ng:
 	cd external/augene-ng/ && bash build-lv2-plugin-host.sh
 	cd external/augene-ng/ && bash build-augene-player.sh
 
-generate-mars-sfizz-mp3: \
-	setup-juce-plugin-list \
-	export-plugin-support-mml \
-	compile-to-tracktionedit \
-	render-wav \
-	convert-wav-to-mp3
+# Setup plugins ready for playing ------------
+
+setup-plugin-run-env: setup-juce-plugin-list export-plugin-support-mml
 
 setup-juce-plugin-list:
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --scan-plugins
@@ -84,13 +81,22 @@ setup-juce-plugin-list:
 export-plugin-support-mml:
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --export-mml
 
+# Generate Music -----------------------------
+
+generate-music: generate-mars-sfizz-mp3
+
+generate-mars-sfizz-mp3: \
+	compile-to-tracktionedit \
+	render-wav \
+	convert-wav-to-mp3
+
 compile-to-tracktionedit:
 	java -jar external/augene-ng/augene-project/augene-console/build/libs/augene-console-0.1.0-SNAPSHOT.jar `pwd`/external/augene-ng/samples/mars/mars_sfizz.augene
 
 render-wav:
-	find . -name *.wav # FIXME: remove (debugging)
 	rm -f external/augene-ng/samples/mars/mars_sfizz.wav
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --render-wav external/augene-ng/samples/mars/mars_sfizz.tracktionedit 
+	find . -name *.wav # FIXME: remove (debugging)
 
 convert-wav-to-mp3:
 	ffmpeg -i external/augene-ng/samples/mars/mars_sfizz.wav -ab 192k -af silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-90dB external/augene-ng/samples/mars/mars_sfizz.mp3
