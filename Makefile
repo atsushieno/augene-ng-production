@@ -69,6 +69,7 @@ setup-sfizz: setup-studiorack
 	# so we use it just to skip builds from source and symlink to it
 	# from the *right* path.
 	if [ ! -d /usr/local/lib/vst3/sfizz.vst3 ] ; then \
+		sudo mkdir -p /usr/local/lib/vst3/ ; \
 		sudo ln -s /usr/local/lib/VST3/studiorack/sfizz/sfizz/1.1.1/sfizz.vst3/ /usr/loca/lib/vst3/sfizz.vst3 ; \
 	fi
 
