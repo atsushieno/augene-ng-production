@@ -63,7 +63,7 @@ setup-simple-reverb:
 	sudo cp -R simple-reverb-build/SimpleReverb_artefacts/VST3/SimpleReverb.vst3 /usr/local/lib/vst3
 
 setup-sfizz: setup-studiorack
-	studiorack plugin install studiorack/sfizz/sfizz
+	sudo studiorack plugin install studiorack/sfizz/sfizz
 
 setup-studiorack:
 	npm install @studiorack/cli -g
