@@ -1,0 +1,35 @@
+diff --git a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
+index 28e06a093..6587d309f 100644
+--- a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
++++ b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
+@@ -399,7 +399,7 @@ public:
+ 
+         // If the filesOrIdentifiersToScan argument isn't empty, we should only scan these
+         // If the path is empty, then paths aren't used for this format.
+-        if (filesOrIdentifiersToScan.isEmpty() && path.getNumPaths() > 0)
++        if (!owner.headlessScanning && filesOrIdentifiersToScan.isEmpty() && path.getNumPaths() > 0)
+         {
+            #if ! JUCE_IOS
+             if (propertiesToUse != nullptr)
+diff --git a/modules/juce_audio_processors/scanning/juce_PluginListComponent.h b/modules/juce_audio_processors/scanning/juce_PluginListComponent.h
+index 307f6fd89..758ba1488 100644
+--- a/modules/juce_audio_processors/scanning/juce_PluginListComponent.h
++++ b/modules/juce_audio_processors/scanning/juce_PluginListComponent.h
+@@ -109,6 +109,9 @@ public:
+     */
+     TextButton& getOptionsButton()                      { return optionsButton; }
+ 
++    /* Indicates whether it should perform headless scanning. Headless scanner skips path selection dialog */
++    void setHeadlessScanning (bool isHeadless)          { headlessScanning = isHeadless; }
++
+ private:
+     //==============================================================================
+     AudioPluginFormatManager& formatManager;
+@@ -119,6 +122,7 @@ private:
+     PropertiesFile* propertiesToUse;
+     String dialogTitle, dialogText;
+     bool allowAsync;
++    bool headlessScanning;
+     int numThreads;
+ 
+     class TableModel;
