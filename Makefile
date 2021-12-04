@@ -76,6 +76,8 @@ augene-ng:
 setup-plugin-run-env: setup-juce-plugin-list export-plugin-support-mml
 
 setup-juce-plugin-list:
+	ls /usr/local/lib/vst3
+	ls /usr/lib/vst3
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --scan-plugins
 
 export-plugin-support-mml:
