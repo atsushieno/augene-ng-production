@@ -50,7 +50,7 @@ nbo.stamp: nbo_2.zip
 nbo_2.zip:
 	wget http://www.bandshed.net/sounds/sfz/nbo_2.zip
 
-plugins: setup-simple-reverb
+plugins: setup-simple-reverb setup-sfizz
 
 setup-simple-reverb:
 	if [ ! -f simple-reverb.stamp ] ; then \
@@ -59,7 +59,14 @@ setup-simple-reverb:
 
 	cmake -S external/SimpleReverb/ -B simple-reverb-build
 	cmake --build simple-reverb-build/
+	sudo mkdir -p /usr/local/lib/vst3
 	sudo cp -R simple-reverb-build/SimpleReverb_artefacts/VST3/SimpleReverb.vst3 /usr/local/lib/vst3
+
+setup-sfizz: setup-studiorack
+	studiorack plugin install studiorack/sfizz/sfizz
+
+setup-studiorack:
+	npm install @studiorack/cli -g
 
 augene-ng:
 	echo sdk.dir=/home/`whoami`/Android/Sdk > external/augene-ng/kotractive-project/local.properties
@@ -77,7 +84,6 @@ setup-plugin-run-env: setup-juce-plugin-list export-plugin-support-mml
 
 setup-juce-plugin-list:
 	ls /usr/local/lib/vst3
-	ls /usr/lib/vst3
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --scan-plugins
 
 export-plugin-support-mml:
