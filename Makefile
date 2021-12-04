@@ -88,6 +88,7 @@ compile-to-tracktionedit:
 	java -jar external/augene-ng/augene-project/augene-console/build/libs/augene-console-0.1.0-SNAPSHOT.jar `pwd`/external/augene-ng/samples/mars/mars_sfizz.augene
 
 render-wav:
+	find . -name *.wav # FIXME: remove (debugging)
 	rm -f external/augene-ng/samples/mars/mars_sfizz.wav
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --render-wav external/augene-ng/samples/mars/mars_sfizz.tracktionedit 
 
