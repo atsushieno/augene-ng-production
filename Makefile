@@ -64,6 +64,13 @@ setup-simple-reverb:
 
 setup-sfizz: setup-studiorack
 	sudo studiorack plugin install studiorack/sfizz/sfizz
+	# studiorack installs the plugin into weird path.
+	# Fortunately we don't want to depend on *their* installation path,
+	# so we use it just to skip builds from source and symlink to it
+	# from the *right* path.
+	if [ ! -d /usr/local/lib/vst3/sfizz.vst3 ] ; then \
+		sudo ln -s /usr/local/lib/VST3/studiorack/sfizz/sfizz/1.1.1/sfizz.vst3/ /usr/loca/lib/vst3/sfizz.vst3 ; \
+	fi
 
 setup-studiorack:
 	npm install @studiorack/cli -g
