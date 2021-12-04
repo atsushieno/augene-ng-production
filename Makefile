@@ -15,7 +15,9 @@ apt:
                  libjack-jackd2-dev ladspa-sdk \
                  doxygen libgrpc++-dev libgrpc-dev \
                  libprotobuf-dev protobuf-compiler protobuf-compiler-grpc \
-                 graphviz cmake ninja-build
+                 graphviz cmake ninja-build \
+		 lv2-dev liblilv-dev libsuil-dev \
+		 ffmpeg
 
 
 sfizz-config:
