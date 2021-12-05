@@ -62,7 +62,14 @@ setup-simple-reverb:
 	sudo mkdir -p /usr/local/lib/vst3
 	sudo cp -R simple-reverb-build/SimpleReverb_artefacts/VST3/SimpleReverb.vst3 /usr/local/lib/vst3
 
-setup-sfizz: setup-studiorack
+setup-sfizz:
+	if [ ! -d /usr/local/lib/vst3/sfizz.vst3 ] ; then \
+		sudo mkdir -p /usr/local/lib/vst3/ ; \
+		sudo ln -s /usr/lib/vst3/sfizz.vst3 /usr/local/lib/vst3/sfizz.vst3 ; \
+	fi
+
+# not in use
+setup-sfizz-studiorack: setup-studiorack
 	sudo studiorack plugin install studiorack/sfizz/sfizz
 	# studiorack installs the plugin into weird path.
 	# Fortunately we don't want to depend on *their* installation path,
@@ -72,7 +79,7 @@ setup-sfizz: setup-studiorack
 		sudo mkdir -p /usr/local/lib/vst3/ ; \
 		sudo ln -s /usr/local/lib/VST3/studiorack/sfizz/sfizz/1.1.1/sfizz.vst3 /usr/local/lib/vst3/sfizz.vst3 ; \
 	fi
-
+# not in use
 setup-studiorack:
 	sudo npm install @studiorack/cli -g
 
