@@ -80,7 +80,12 @@ augene-ng:
 	echo sdk.dir=/home/`whoami`/Android/Sdk > external/augene-ng/kotractive-project/local.properties
 	echo sdk.dir=/home/`whoami`/Android/Sdk > external/augene-ng/augene-project/local.properties
 
-	cd external/augene-ng/external/tracktion_engine/modules/juce && patch -i ../../../../../../juce-plugin-scanner-headless.patch -p1 && cd ../../../../../..
+	if [ ! -f tracktion-juce.stamp ] ; then \
+		cd external/augene-ng/external/tracktion_engine/modules/juce ; \
+		patch -i ../../../../../../juce-plugin-scanner-headless.patch -p1 ; \
+		cd ../../../../../.. ; \
+		touch tracktion-juce.stamp ; \
+	fi
 
 	cd external/augene-ng/kotractive-project && ./gradlew publishToMavenLocal
 	cd external/augene-ng/augene-project && ./gradlew publishToMavenLocal augene-console:build
