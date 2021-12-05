@@ -34,14 +34,14 @@ sfz: vpo3 freepats nbo
 
 vpo3:
 	pwd
-	mkdir -p sounds/sfz
-	rm -rf sounds/sfz/Virtual-Playing-Orchestra3
-	cd sounds/sfz && ln -s ../../external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../..
+	mkdir -p ~/sounds/sfz
+	rm -rf ~/sounds/sfz/Virtual-Playing-Orchestra3
+	cd ~/sounds/sfz && ln -s ../../external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../..
 
 freepats: freepats.stamp
 freepats.stamp: DrawbarOrganEmulation-SFZ-20190712.tar.xz
-	mkdir -p sounds/sfz/
-	cd sounds/sfz && tar xvf ../../DrawbarOrganEmulation-SFZ-20190712.tar.xz && cd ../.. || exit 1
+	mkdir -p ~/sounds/sfz/
+	cd ~/sounds/sfz && tar xvf ../../DrawbarOrganEmulation-SFZ-20190712.tar.xz && cd ../.. || exit 1
 	touch freepats.stamp
 DrawbarOrganEmulation-SFZ-20190712.tar.xz:
 	if [ ! -f DrawbarOrganEmulation-SFZ-20190712.tar.xz ] ; then \
@@ -50,8 +50,8 @@ DrawbarOrganEmulation-SFZ-20190712.tar.xz:
 
 nbo: nbo.stamp
 nbo.stamp: nbo_2.zip
-	mkdir -p sounds/sfz/
-	cd sounds/sfz/ && unzip ../../nbo_2.zip && cd ../../ || exit 1
+	mkdir -p ~/sounds/sfz/
+	cd ~/sounds/sfz/ && unzip ../../nbo_2.zip && cd ../../ || exit 1
 	touch nbo.stamp
 nbo_2.zip:
 	if [ ! -f nbo_2.zip ] ; then \
