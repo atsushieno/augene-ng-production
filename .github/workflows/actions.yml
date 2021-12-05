@@ -43,7 +43,7 @@ jobs:
     - name: make sfz
       run: make sfz
     - name: setup plugins
-      run: make sfizz-config plugins
+      run: make apt sfizz-config plugins
     - name: setup augene-ng
       run: make augene-ng
     - name: setup plugins ready for playing
