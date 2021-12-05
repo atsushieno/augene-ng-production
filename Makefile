@@ -80,17 +80,24 @@ augene-ng:
 	echo sdk.dir=/home/`whoami`/Android/Sdk > external/augene-ng/kotractive-project/local.properties
 	echo sdk.dir=/home/`whoami`/Android/Sdk > external/augene-ng/augene-project/local.properties
 
+	cd external/augene-ng/kotractive-project && ./gradlew publishToMavenLocal
+	cd external/augene-ng/augene-project && ./gradlew publishToMavenLocal augene-console:build
+
 	if [ ! -f tracktion-juce.stamp ] ; then \
 		cd external/augene-ng/external/tracktion_engine/modules/juce ; \
 		patch -i ../../../../../../juce-plugin-scanner-headless.patch -p1 ; \
 		cd ../../../../../.. ; \
 		touch tracktion-juce.stamp ; \
 	fi
-
-	cd external/augene-ng/kotractive-project && ./gradlew publishToMavenLocal
-	cd external/augene-ng/augene-project && ./gradlew publishToMavenLocal augene-console:build
-
 	cd external/augene-ng/ && bash build-lv2-plugin-host.sh
+
+	if [ ! -f augene-headless.stamp ] ; then \
+		cd external/augene-ng ; \
+		patch -i ../../augene-headless-plugin-scan.patch -p1 ; \
+		cd ../../ ; \
+		touch augene-headless.stamp ; \
+	fi
+
 	cd external/augene-ng/ && bash build-augene-player.sh
 
 # Setup plugins ready for playing ------------

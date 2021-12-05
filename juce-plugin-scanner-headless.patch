@@ -1,54 +1,18 @@
-diff --git a/extras/AudioPluginHost/CMakeLists.txt b/extras/AudioPluginHost/CMakeLists.txt
-index fb1fb9295..9aa28eb9b 100644
---- a/extras/AudioPluginHost/CMakeLists.txt
-+++ b/extras/AudioPluginHost/CMakeLists.txt
-@@ -53,7 +53,24 @@ target_compile_definitions(AudioPluginHost PRIVATE
-     JUCE_WASAPI=1
-     JUCE_WEB_BROWSER=0)
- 
-+find_package(PkgConfig REQUIRED)
-+
-+pkg_check_modules(LILV lilv-0)
-+pkg_check_modules(SUIL suil-0)
-+
-+target_include_directories(AudioPluginHost PRIVATE
-+    ${LILV_INCLUDE_DIRS}
-+    ${SUIL_INCLUDE_DIRS}
-+    "../../../../../../external/jlv2/modules")
-+
-+juce_add_modules(
-+    ALIAS_NAMESPACE jlv2
-+    ../../../../../../external/jlv2/modules/jlv2_host)
-+
- target_link_libraries(AudioPluginHost PRIVATE
-+    ${LILV_LIBRARIES}
-+    ${SUIL_LIBRARIES}
-+    jlv2::jlv2_host
-     juce::juce_audio_utils
-     juce::juce_cryptography
-     juce::juce_dsp
-diff --git a/extras/AudioPluginHost/Source/UI/MainHostWindow.cpp b/extras/AudioPluginHost/Source/UI/MainHostWindow.cpp
-index dfd4927c8..645d333e7 100644
---- a/extras/AudioPluginHost/Source/UI/MainHostWindow.cpp
-+++ b/extras/AudioPluginHost/Source/UI/MainHostWindow.cpp
-@@ -26,6 +26,7 @@
- #include <JuceHeader.h>
- #include "MainHostWindow.h"
- #include "../Plugins/InternalPlugins.h"
-+#include "jlv2_host/jlv2_host.h"
- 
- 
- //==============================================================================
-@@ -79,6 +80,7 @@ MainHostWindow::MainHostWindow()
+diff --git a/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp b/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
+index 9eab44c26..ef8fab4fe 100644
+--- a/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
++++ b/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
+@@ -83,6 +83,8 @@ void PluginDirectoryScanner::updateProgress()
+ bool PluginDirectoryScanner::scanNextFile (bool dontRescanIfAlreadyInList,
+                                            String& nameOfPluginBeingScanned)
  {
-     formatManager.addDefaultFormats();
-     formatManager.addFormat (new InternalPluginFormat());
-+    formatManager.addFormat (new jlv2::LV2PluginFormat());
++    String msg{"  !!!!!! scanNextFile " + nameOfPluginBeingScanned};
++    puts(msg.toRawUTF8());
+     const int index = --nextIndex;
  
-     auto safeThis = SafePointer<MainHostWindow> (this);
-     RuntimePermissions::request (RuntimePermissions::recordAudio,
+     if (index >= 0)
 diff --git a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
-index 28e06a093..6587d309f 100644
+index 28e06a093..d8ca06657 100644
 --- a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
 +++ b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
 @@ -399,7 +399,7 @@ public:
@@ -60,6 +24,14 @@ index 28e06a093..6587d309f 100644
          {
             #if ! JUCE_IOS
              if (propertiesToUse != nullptr)
+@@ -525,6 +525,7 @@ private:
+ 
+     void startScan()
+     {
++        puts("!!!!!!!!!!!!! startScan() !!!!!!!!!!!!!!!!!");
+         pathChooserWindow.setVisible (false);
+ 
+         scanner.reset (new PluginDirectoryScanner (owner.list, formatToScan, pathList.getPath(),
 diff --git a/modules/juce_audio_processors/scanning/juce_PluginListComponent.h b/modules/juce_audio_processors/scanning/juce_PluginListComponent.h
 index 307f6fd89..758ba1488 100644
 --- a/modules/juce_audio_processors/scanning/juce_PluginListComponent.h
