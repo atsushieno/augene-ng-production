@@ -101,7 +101,7 @@ augene-ng:
 	cd external/augene-ng && git diff
 	cd external/augene-ng/external/tracktion_engine/modules/juce && git diff
 
-	cd external/augene-ng/ && bash build-lv2-plugin-host.sh
+	# cd external/augene-ng/ && bash build-lv2-plugin-host.sh
 	cd external/augene-ng/ && bash build-augene-player.sh
 
 # Setup plugins ready for playing ------------

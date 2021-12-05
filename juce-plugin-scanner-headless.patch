@@ -1,5 +1,18 @@
+diff --git a/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp b/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
+index 9eab44c26..d711120ba 100644
+--- a/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
++++ b/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
+@@ -83,6 +83,8 @@ void PluginDirectoryScanner::updateProgress()
+ bool PluginDirectoryScanner::scanNextFile (bool dontRescanIfAlreadyInList,
+                                            String& nameOfPluginBeingScanned)
+ {
++    puts(("  !!!!!! scanNextFile: " + nameOfPluginBeingScanned).toRawUTF8());
++    puts(String::formatted("  nextIndex: %d", nextIndex.get()).toRawUTF8());
+     const int index = --nextIndex;
+ 
+     if (index >= 0)
 diff --git a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
-index 28e06a093..6bb924bbd 100644
+index 28e06a093..277f75083 100644
 --- a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
 +++ b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
 @@ -399,7 +399,7 @@ public:
@@ -11,12 +24,13 @@ index 28e06a093..6bb924bbd 100644
          {
             #if ! JUCE_IOS
              if (propertiesToUse != nullptr)
-@@ -420,6 +420,8 @@ public:
+@@ -420,6 +420,9 @@ public:
          }
          else
          {
 +            if (owner.headlessScanning)
 +                pathList.setPath (path);
++            puts(("!!!!! " + path.toString()).toRawUTF8());
              startScan();
          }
      }
