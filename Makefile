@@ -97,10 +97,6 @@ augene-ng:
 		touch augene-headless.stamp ; \
 	fi
 
-	# FIXME: remove below after debugging is done.
-	cd external/augene-ng && git diff
-	cd external/augene-ng/external/tracktion_engine/modules/juce && git diff
-
 	# cd external/augene-ng/ && bash build-lv2-plugin-host.sh
 	cd external/augene-ng/ && bash build-augene-player.sh
 
@@ -111,6 +107,7 @@ setup-plugin-run-env: setup-juce-plugin-list export-plugin-support-mml
 setup-juce-plugin-list:
 	ls /usr/local/lib/vst3
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --scan-plugins
+	cat ~/.config/augene-ng/Settings.xml
 
 export-plugin-support-mml:
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --export-mml
