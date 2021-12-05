@@ -65,7 +65,7 @@ setup-simple-reverb:
 setup-sfizz:
 	if [ ! -d /usr/local/lib/vst3/sfizz.vst3 ] ; then \
 		sudo mkdir -p /usr/local/lib/vst3/ ; \
-		sudo ln -s /usr/lib/vst3/sfizz.vst3 /usr/local/lib/vst3/sfizz.vst3 ; \
+		sudo cp -R /usr/lib/vst3/sfizz.vst3 /usr/local/lib/vst3/sfizz.vst3 ; \
 	fi
 
 # not in use
