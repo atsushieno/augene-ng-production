@@ -18,11 +18,22 @@ jobs:
       env:
         cache-name: cache-sfz
       with:
-        path:
-          /home/runner/sounds/sfz
-          /home/runner/DrawbarOrganEmulation-SFZ-20190712.tar.xz
-          /home/runner/nbo_2.zip
+        path: /home/runner/sounds/sfz
         key: sounds/sfz
+    - name: cache organ xz
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-organ-zip
+      with:
+        path: /home/runner/DrawbarOrganEmulation-SFZ-20190712.tar.xz
+        key: organ-zip
+    - name: cache nbo_2
+      uses: actions/cache@v2
+      env:
+        cache-name: cache-nbo-2-zip
+      with:
+        path: /home/runner/nbo_2.zip
+        key: nbo-2-zip
     - name: apt update
       run: |
         sudo apt-get update

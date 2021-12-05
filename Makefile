@@ -29,9 +29,11 @@ sfizz-config:
 
 
 sfz: vpo3 freepats nbo
+	pwd
 	find /home/$(USER)/sounds/sfz	# FIXME: remove debugging
 
 vpo3:
+	pwd
 	mkdir -p sounds/sfz
 	rm -rf sounds/sfz/Virtual-Playing-Orchestra3
 	cd sounds/sfz && ln -s ../../external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../..
