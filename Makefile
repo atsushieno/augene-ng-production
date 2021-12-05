@@ -89,7 +89,6 @@ augene-ng:
 		cd ../../../../../.. ; \
 		touch tracktion-juce.stamp ; \
 	fi
-	cd external/augene-ng/ && bash build-lv2-plugin-host.sh
 
 	if [ ! -f augene-headless.stamp ] ; then \
 		cd external/augene-ng ; \
@@ -98,6 +97,11 @@ augene-ng:
 		touch augene-headless.stamp ; \
 	fi
 
+	# FIXME: remove below after debugging is done.
+	cd external/augene-ng && git diff
+	cd external/augene-ng/external/tracktion_engine/modules/juce && git diff
+
+	cd external/augene-ng/ && bash build-lv2-plugin-host.sh
 	cd external/augene-ng/ && bash build-augene-player.sh
 
 # Setup plugins ready for playing ------------
@@ -126,7 +130,6 @@ compile-to-tracktionedit:
 render-wav:
 	rm -f external/augene-ng/samples/mars/mars_sfizz.wav
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --render-wav external/augene-ng/samples/mars/mars_sfizz.tracktionedit 
-	find . -name *.wav # FIXME: remove (debugging)
 
 convert-wav-to-mp3:
 	ffmpeg -i external/augene-ng/samples/mars/mars_sfizz.wav -ab 192k -af silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-90dB external/augene-ng/samples/mars/mars_sfizz.mp3

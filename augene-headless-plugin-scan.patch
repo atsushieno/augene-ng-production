@@ -10,9 +10,3 @@ index 4462956..ad80a2f 100644
          activePluginListComponent.reset(v);
          nextFormatForPseudoHeadlessScanning = 0;
          startTimer(100);
-diff --git a/external/tracktion_engine b/external/tracktion_engine
---- a/external/tracktion_engine
-+++ b/external/tracktion_engine
-@@ -1 +1 @@
--Subproject commit 50e67a298620b6889e00a51a85411848d8be0e25
-+Subproject commit 50e67a298620b6889e00a51a85411848d8be0e25-dirty
