@@ -1,4 +1,5 @@
 USER=$(shell whoami)
+WORKDIR=$(shell pwd)
 
 build: sfz apt sfizz-config plugins augene-ng setup-plugin-run-env generate-music
 
@@ -41,7 +42,7 @@ vpo3:
 freepats: freepats.stamp
 freepats.stamp: DrawbarOrganEmulation-SFZ-20190712.tar.xz
 	mkdir -p ~/sounds/sfz/
-	cd ~/sounds/sfz && tar xvf ../../DrawbarOrganEmulation-SFZ-20190712.tar.xz && cd ../.. || exit 1
+	cd ~/sounds/sfz && tar xvf $(WORKDIR)/DrawbarOrganEmulation-SFZ-20190712.tar.xz || exit 1
 	touch freepats.stamp
 DrawbarOrganEmulation-SFZ-20190712.tar.xz:
 	if [ ! -f DrawbarOrganEmulation-SFZ-20190712.tar.xz ] ; then \
@@ -51,7 +52,7 @@ DrawbarOrganEmulation-SFZ-20190712.tar.xz:
 nbo: nbo.stamp
 nbo.stamp: nbo_2.zip
 	mkdir -p ~/sounds/sfz/
-	cd ~/sounds/sfz/ && unzip ../../nbo_2.zip && cd ../../ || exit 1
+	cd ~/sounds/sfz/ && unzip $(WORKDIR)/nbo_2.zip || exit 1
 	touch nbo.stamp
 nbo_2.zip:
 	if [ ! -f nbo_2.zip ] ; then \
