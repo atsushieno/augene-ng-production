@@ -57,10 +57,18 @@ jobs:
       run: xvfb-run -a --server-args="-screen 0 1280x800x24 -ac -nolisten tcp -dpi 96 +extension RANDR" make render-wav
     - name: WAV to MP3 # FIXME: remove these split tasks
       run: make convert-wav-to-mp3
-    - name: upload artifact
+    - name: upload artifact - success
       if: success()
       uses: actions/upload-artifact@v2
       with:
         name: augene-ng-production-artifacts
         path: |
           external/augene-ng/samples/mars/mars_sfizz.mp3
+    - name: upload artifacts - intermediates
+      uses: actions/upload-artifact@v2
+      with:
+        name: augene-ng-production-intermediates
+        path: |
+          external/augene-ng/samples/mars/mars_sfizz.tracktionedit
+          external/augene-ng/samples/mars/mars_sfizz.umpx
+          external/augene-ng/samples/mars/mars_sfizz.tracktion
