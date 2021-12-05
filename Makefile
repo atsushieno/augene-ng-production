@@ -74,7 +74,7 @@ setup-sfizz: setup-studiorack
 	fi
 
 setup-studiorack:
-	npm install @studiorack/cli -g
+	sudo npm install @studiorack/cli -g
 
 augene-ng:
 	echo sdk.dir=/home/`whoami`/Android/Sdk > external/augene-ng/kotractive-project/local.properties
