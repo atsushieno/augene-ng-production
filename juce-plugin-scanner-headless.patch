@@ -1,18 +1,5 @@
-diff --git a/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp b/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
-index 9eab44c26..ef8fab4fe 100644
---- a/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
-+++ b/modules/juce_audio_processors/scanning/juce_PluginDirectoryScanner.cpp
-@@ -83,6 +83,8 @@ void PluginDirectoryScanner::updateProgress()
- bool PluginDirectoryScanner::scanNextFile (bool dontRescanIfAlreadyInList,
-                                            String& nameOfPluginBeingScanned)
- {
-+    String msg{"  !!!!!! scanNextFile " + nameOfPluginBeingScanned};
-+    puts(msg.toRawUTF8());
-     const int index = --nextIndex;
- 
-     if (index >= 0)
 diff --git a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
-index 28e06a093..d8ca06657 100644
+index 28e06a093..6bb924bbd 100644
 --- a/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
 +++ b/modules/juce_audio_processors/scanning/juce_PluginListComponent.cpp
 @@ -399,7 +399,7 @@ public:
@@ -24,14 +11,15 @@ index 28e06a093..d8ca06657 100644
          {
             #if ! JUCE_IOS
              if (propertiesToUse != nullptr)
-@@ -525,6 +525,7 @@ private:
- 
-     void startScan()
-     {
-+        puts("!!!!!!!!!!!!! startScan() !!!!!!!!!!!!!!!!!");
-         pathChooserWindow.setVisible (false);
- 
-         scanner.reset (new PluginDirectoryScanner (owner.list, formatToScan, pathList.getPath(),
+@@ -420,6 +420,8 @@ public:
+         }
+         else
+         {
++            if (owner.headlessScanning)
++                pathList.setPath (path);
+             startScan();
+         }
+     }
 diff --git a/modules/juce_audio_processors/scanning/juce_PluginListComponent.h b/modules/juce_audio_processors/scanning/juce_PluginListComponent.h
 index 307f6fd89..758ba1488 100644
 --- a/modules/juce_audio_processors/scanning/juce_PluginListComponent.h
