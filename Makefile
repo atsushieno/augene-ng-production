@@ -25,9 +25,11 @@ sfizz-config:
 		mkdir -p ~/.config/SFZTools/sfizz/ ; \
 		sed -e "s/%%USER%%/$(USER)/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
 	fi
+	cat ~/.config/SFZTools/sfizz/settings.xml # FIXME: remove debugging
 
 
 sfz: vpo3 freepats nbo
+	find /home/$(USER)/sounds/sfz	# FIXME: remove debugging
 
 vpo3:
 	mkdir -p sounds/sfz
@@ -40,7 +42,9 @@ freepats.stamp: DrawbarOrganEmulation-SFZ-20190712.tar.xz
 	cd sounds/sfz && tar xvf ../../DrawbarOrganEmulation-SFZ-20190712.tar.xz && cd ../.. || exit 1
 	touch freepats.stamp
 DrawbarOrganEmulation-SFZ-20190712.tar.xz:
-	wget https://freepats.zenvoid.org/Organ/DrawbarOrganEmulation/DrawbarOrganEmulation-SFZ-20190712.tar.xz
+	if [ ! -f DrawbarOrganEmulation-SFZ-20190712.tar.xz ] ; then \
+		wget https://freepats.zenvoid.org/Organ/DrawbarOrganEmulation/DrawbarOrganEmulation-SFZ-20190712.tar.xz ; \
+	fi
 
 nbo: nbo.stamp
 nbo.stamp: nbo_2.zip
@@ -48,7 +52,9 @@ nbo.stamp: nbo_2.zip
 	cd sounds/sfz/ && unzip ../../nbo_2.zip && cd ../../ || exit 1
 	touch nbo.stamp
 nbo_2.zip:
-	wget http://www.bandshed.net/sounds/sfz/nbo_2.zip
+	if [ ! -f nbo_2.zip ] ; then \
+		wget http://www.bandshed.net/sounds/sfz/nbo_2.zip ; \
+	fi
 
 plugins: setup-simple-reverb setup-sfizz
 

@@ -48,14 +48,11 @@ jobs:
       run: make augene-ng
     - name: setup plugins ready for playing
       run: xvfb-run -a --server-args="-screen 0 1280x800x24 -ac -nolisten tcp -dpi 96 +extension RANDR" make setup-plugin-run-env
-    - name: generate mp3
-      if: false # FIXME: use this instead
-      run: make generate-music
-    - name: augene to TE # FIXME: remove these split tasks
+    - name: augene to TractionEdit
       run: make compile-to-tracktionedit
-    - name: TE to WAV # FIXME: remove these split tasks
+    - name: TractionEdit to WAV
       run: xvfb-run -a --server-args="-screen 0 1280x800x24 -ac -nolisten tcp -dpi 96 +extension RANDR" make render-wav
-    - name: WAV to MP3 # FIXME: remove these split tasks
+    - name: WAV to MP3
       run: make convert-wav-to-mp3
     - name: upload artifact - success
       if: success()
