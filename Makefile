@@ -37,7 +37,7 @@ vpo3:
 	pwd
 	mkdir -p ~/sounds/sfz
 	rm -rf ~/sounds/sfz/Virtual-Playing-Orchestra3
-	cd ~/sounds/sfz && ln -s ../../external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../..
+	cd ~/sounds/sfz && ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../..
 
 freepats: freepats.stamp
 freepats.stamp: DrawbarOrganEmulation-SFZ-20190712.tar.xz
