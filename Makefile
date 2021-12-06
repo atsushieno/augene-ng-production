@@ -30,10 +30,11 @@ sfizz-config:
 
 
 sfz: vpo3 freepats nbo
-	if [ ! -e "~/Documents/SFZ Instruments" ] ; then \
-		ln -s ~/sounds/sfz "~/Documents/SFZ Instruments" ; \
-	fi
-	pwd
+	mkdir -p "~/Documents/SFZ instruments"
+	for dir in ~/sounds/sfz/* \
+	do \
+		ln -s $dir "/home/$(USER)/Documents/SFZ instruments" \
+	done
 	find -L ~/sounds/sfz -name *.sfz # FIXME: remove debugging
 
 vpo3:
