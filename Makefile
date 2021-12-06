@@ -31,9 +31,9 @@ sfizz-config:
 
 sfz: vpo3 freepats nbo
 	mkdir -p "~/Documents/SFZ instruments"
-	for dir in ~/sounds/sfz/* \
+	for dir in ~/sounds/sfz/* ; \
 	do \
-		ln -s $dir "/home/$(USER)/Documents/SFZ instruments" \
+		ln -s $dir "/home/$(USER)/Documents/SFZ instruments" ; \
 	done
 	find -L ~/sounds/sfz -name *.sfz # FIXME: remove debugging
 
