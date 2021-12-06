@@ -24,7 +24,7 @@ apt:
 sfizz-config:
 	if [ ! -f ~/.config/SFZTools/sfizz/settings.xml ] ; then \
 		mkdir -p ~/.config/SFZTools/sfizz/ ; \
-		sed -e "s/%%USER%%/WHEE/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
+		sed -e "s/%%USER%%/$(USER)/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
 	fi
 	cat ~/.config/SFZTools/sfizz/settings.xml # FIXME: remove debugging
 
