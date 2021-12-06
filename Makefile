@@ -31,17 +31,22 @@ sfizz-config:
 
 sfz: vpo3 freepats nbo
 	mkdir -p "/home/$(USER)/Documents/SFZ instruments"
-	for dir in ~/sounds/sfz/* ; \
+	@for entry in sounds/sfz/* ; \
 	do \
-		ln -s $$dir "/home/$(USER)/Documents/SFZ instruments/" ; \
+		if [ ! -e "/home/$(USER)/Documents/SFZ instruments/$$(basename $$entry)" ] ; then \
+			echo "creting symlink as /home/$(USER)/Documents/SFZ instruments/$$(basename $$entry)" ; \
+			ln -s $(WORKDIR)/$$entry "/home/$(USER)/Documents/SFZ instruments/" ; \
+		fi ; \
 	done
-	find -L ~/sounds/sfz -name *.sfz # FIXME: remove debugging
+	#find -L sounds/sfz -name *.sfz # FIXME: remove debugging
 
 vpo3:
 	pwd
 	mkdir -p ~/sounds/sfz
-	rm -rf ~/sounds/sfz/Virtual-Playing-Orchestra3
-	cd ~/sounds/sfz && ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../..
+	if [ ! -d ~/sounds/sfz/Virtual-Playing-Orchestra3 ]; then \
+		rm -rf ~/sounds/sfz/Virtual-Playing-Orchestra3 ; \
+		cd ~/sounds/sfz && ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../.. ; \
+	fi
 
 freepats: freepats.stamp
 freepats.stamp: DrawbarOrganEmulation-SFZ-20190712.tar.xz
