@@ -13,13 +13,6 @@ jobs:
       uses: actions/checkout@v1
       with:
         submodules: recursive
-    - name: cache sfz
-      uses: actions/cache@v2
-      env:
-        cache-name: cache-sfz
-      with:
-        path: /home/runner/sounds/sfz
-        key: sounds/sfz
     - name: cache organ xz
       uses: actions/cache@v2
       env:
