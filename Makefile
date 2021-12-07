@@ -1,5 +1,6 @@
 USER=$(shell whoami)
 WORKDIR=$(shell pwd)
+WORKDIR_ESCAPED=$(subst /,\\/,$(WORKDIR))
 
 build: sfz apt sfizz-config plugins augene-ng setup-plugin-run-env generate-music
 
@@ -22,9 +23,10 @@ apt:
 
 
 sfizz-config:
+	sed -e "s/%%WORKDIR%%/$(WORKDIR_ESCAPED)/" sfizz-settings.xml
 	if [ ! -f ~/.config/SFZTools/sfizz/settings.xml ] ; then \
 		mkdir -p ~/.config/SFZTools/sfizz/ ; \
-		sed -e "s/%%WORKDIR%%/$(WORKDIR)/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
+		sed -e "s/%%WORKDIR%%/$(WORKDIR_ESCAPED)/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
 	fi
 	cat ~/.config/SFZTools/sfizz/settings.xml # FIXME: remove debugging
 
