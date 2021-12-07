@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
 <properties>
-	<entry key="user_files_dir">/home/%%USER%%/sounds/sfz</entry>
+	<entry key="user_files_dir">%%WORKDIR%%/sounds/sfz</entry>
 	<entry key="current_theme">Dark</entry>
 </properties>

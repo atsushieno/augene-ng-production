@@ -24,34 +24,28 @@ apt:
 sfizz-config:
 	if [ ! -f ~/.config/SFZTools/sfizz/settings.xml ] ; then \
 		mkdir -p ~/.config/SFZTools/sfizz/ ; \
-		sed -e "s/%%USER%%/$(USER)/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
+		sed -e "s/%%WORKDIR%%/$(WORKDIR)/" sfizz-settings.xml > ~/.config/SFZTools/sfizz/settings.xml ; \
 	fi
 	cat ~/.config/SFZTools/sfizz/settings.xml # FIXME: remove debugging
 
 
 sfz: vpo3 freepats nbo
-	mkdir -p "/home/$(USER)/Documents/SFZ instruments"
-	@for entry in sounds/sfz/* ; \
-	do \
-		if [ ! -e "/home/$(USER)/Documents/SFZ instruments/$$(basename $$entry)" ] ; then \
-			echo "creting symlink as /home/$(USER)/Documents/SFZ instruments/$$(basename $$entry)" ; \
-			ln -s $(WORKDIR)/$$entry "/home/$(USER)/Documents/SFZ instruments/" ; \
-		fi ; \
-	done
-	#find -L sounds/sfz -name *.sfz # FIXME: remove debugging
+	ls -l sounds/sfz # FIXME: remove debugging
+	find -L sounds/sfz -name *.sfz || exit 0 # FIXME: remove debugging
 
 vpo3:
 	pwd
-	mkdir -p ~/sounds/sfz
-	if [ ! -d ~/sounds/sfz/Virtual-Playing-Orchestra3 ]; then \
-		rm -rf ~/sounds/sfz/Virtual-Playing-Orchestra3 ; \
-		cd ~/sounds/sfz && ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 Virtual-Playing-Orchestra3 && cd ../.. ; \
+	mkdir -p sounds/sfz
+	if [ ! -d sounds/sfz/Virtual-Playing-Orchestra3 ]; then \
+		rm -rf sounds/sfz/Virtual-Playing-Orchestra3 ; \
+		ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 sounds/sfz/Virtual-Playing-Orchestra3 ; \
+		ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 sounds/sfz/Virtual_Playing_Orchestra_3 ; \
 	fi
 
 freepats: freepats.stamp
 freepats.stamp: DrawbarOrganEmulation-SFZ-20190712.tar.xz
-	mkdir -p ~/sounds/sfz/
-	cd ~/sounds/sfz && tar xvf $(WORKDIR)/DrawbarOrganEmulation-SFZ-20190712.tar.xz || exit 1
+	mkdir -p sounds/sfz/
+	cd sounds/sfz && tar xvf $(WORKDIR)/DrawbarOrganEmulation-SFZ-20190712.tar.xz || exit 1
 	touch freepats.stamp
 DrawbarOrganEmulation-SFZ-20190712.tar.xz:
 	if [ ! -f DrawbarOrganEmulation-SFZ-20190712.tar.xz ] ; then \
@@ -60,8 +54,8 @@ DrawbarOrganEmulation-SFZ-20190712.tar.xz:
 
 nbo: nbo.stamp
 nbo.stamp: nbo_2.zip
-	mkdir -p ~/sounds/sfz/
-	cd ~/sounds/sfz/ && unzip $(WORKDIR)/nbo_2.zip || exit 1
+	mkdir -p sounds/sfz/
+	cd sounds/sfz/ && unzip $(WORKDIR)/nbo_2.zip || exit 1
 	touch nbo.stamp
 nbo_2.zip:
 	if [ ! -f nbo_2.zip ] ; then \
