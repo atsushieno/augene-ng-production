@@ -38,9 +38,9 @@ sfz: vpo3 freepats nbo
 vpo3:
 	pwd
 	mkdir -p sounds/sfz
+	# FIXME: copy should not be forced
 	if [ ! -d sounds/sfz/Virtual-Playing-Orchestra3 ]; then \
 		rm -rf sounds/sfz/Virtual-Playing-Orchestra3 ; \
-		# FIXME: copy should not be forced
 		#ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 sounds/sfz/Virtual-Playing-Orchestra3 ; \
 		cp -R $(WORKDIR)/external/Virtual_Playing_Orchestra_3 sounds/sfz/Virtual-Playing-Orchestra3 ; \
 		ln -s $(WORKDIR)/external/Virtual_Playing_Orchestra_3 sounds/sfz/Virtual_Playing_Orchestra_3 ; \
