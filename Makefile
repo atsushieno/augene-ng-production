@@ -5,8 +5,8 @@ build: sfz apt sfizz-config plugins augene-ng setup-plugin-run-env generate-musi
 
 apt:
 	echo "Installing sfizz from OBS..."
-	echo 'deb http://download.opensuse.org/repositories/home:/sfztools:/sfizz/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/home:sfztools:sfizz.list
-	curl -fsSL https://download.opensuse.org/repositories/home:sfztools:sfizz/xUbuntu_20.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_sfztools_sfizz.gpg > /dev/null
+	echo 'deb http://download.opensuse.org/repositories/home:/sfztools:/sfizz:/develop/xUbuntu_20.04/ /' | sudo tee /etc/apt/sources.list.d/home:sfztools:sfizz:develop.list
+	curl -fsSL https://download.opensuse.org/repositories/home:sfztools:sfizz:develop/xUbuntu_20.04/Release.key | gpg --dearmor | sudo tee /etc/apt/trusted.gpg.d/home_sfztools_sfizz_develop.gpg > /dev/null
 	sudo apt update
 	echo y | sudo apt install sfizz
 	echo y | sudo apt-get install xvfb wget unzip libc6 \
