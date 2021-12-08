@@ -152,5 +152,5 @@ render-wav:
 	external/augene-ng/augene-player/build/AugenePlayer_artefacts/AugenePlayer --render-wav external/augene-ng/samples/mars/mars_sfizz.tracktionedit 
 
 convert-wav-to-mp3:
-	ffmpeg -i external/augene-ng/samples/mars/mars_sfizz.wav -ab 192k -af silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-90dB external/augene-ng/samples/mars/mars_sfizz.mp3
+	ffmpeg -i external/augene-ng/samples/mars/mars_sfizz.wav -ab 128k -af silenceremove=stop_periods=-1:stop_duration=1:stop_threshold=-90dB external/augene-ng/samples/mars/mars_sfizz.mp3
 
